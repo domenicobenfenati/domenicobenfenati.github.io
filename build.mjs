@@ -67,7 +67,8 @@ const page = ({ title, description, main, current }) => {
 <meta property="og:type" content="profile">
 <meta property="og:title" content="Domenico Benfenati, IKNOS Lab, University of Naples Federico II">
 <meta property="og:description" content="Data quality and data-centric AI for satellite imagery and agrifood.">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://domenicobenfenati.github.io/share.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#e8e8e3">
 <meta name="site-kind" content="other">
@@ -113,7 +114,7 @@ const page = ({ title, description, main, current }) => {
   .sat-panel { pointer-events: auto; }
   .hero-sat h1 { font-size: clamp(56px, 7vw, 104px); line-height: 0.95; letter-spacing: var(--display-tracking-xl); }
   .hero-id { display: flex; align-items: center; gap: var(--s-4); margin-bottom: var(--s-6); }
-  .avatar { width: 72px; height: 72px; border-radius: 999px; object-fit: cover; filter: grayscale(.15) contrast(1.02); }
+  .avatar { width: 88px; height: 88px; border-radius: 999px; object-fit: cover; filter: grayscale(.15) contrast(1.02); }
   .hero-id p { font-size: var(--t-small); line-height: 1.45; color: var(--muted); }
   .hero-id b { color: var(--ink); font-weight: 500; }
   .hero__lead { max-width: 40ch; }
@@ -146,6 +147,7 @@ const page = ({ title, description, main, current }) => {
   .cv-title { font: 500 12px/1 var(--font-mono); color: var(--muted); margin: var(--s-6) 0 var(--s-3); text-transform: uppercase; letter-spacing: 0.06em; }
   .cv-title:first-child { margin-top: 0; }
 
+  .about-photo { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; margin-bottom: var(--s-6); }
   /* research index */
   .index > li { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 5fr) minmax(0, 3fr); gap: var(--gutter); padding: var(--s-5) 0; border-bottom: 1px solid var(--line); align-items: baseline; }
   .index > li:first-child { padding-top: 0; }
@@ -255,7 +257,9 @@ ${NAV.map(([href, label]) => `      <div class="nav__item"><a class="nav__link" 
       <div class="span-4 start-6 stack-2">
         <p><a class="plain-link" href="mailto:domenico.benfenati@unina.it">domenico.benfenati@unina.it</a></p>
         <p class="elsewhere">
+          <a class="plain-link" href="https://scholar.google.com/citations?user=tjH_pzcAAAAJ" rel="noopener">Google Scholar</a>
           <a class="plain-link" href="https://orcid.org/0009-0008-5825-8043" rel="noopener">ORCID</a>
+          <a class="plain-link" href="https://www.linkedin.com/in/domenico-benfenati/" rel="noopener">LinkedIn</a>
           <a class="plain-link" href="https://github.com/dBenf" rel="noopener">GitHub</a>
           <a class="plain-link" href="https://huggingface.co/dBenf" rel="noopener">Hugging Face</a>
           <a class="plain-link" href="https://dblp.org/pid/367/6149.html" rel="noopener">dblp</a>
@@ -314,17 +318,19 @@ const HOME_MAIN = `
       <div class="grid grid--top">
         <div class="span-7 bio">
           <p>I am a research fellow at DIETI, University of Naples Federico II, in the IKNOS Lab, and I work with the PICUS Lab in the same department.</p>
-          <p>I took my MSc in Computer Science Engineering at Federico II in 2023, with a thesis on populating knowledge graphs with generative models. I then joined the Italian National PhD Programme in Artificial Intelligence, in its Agrifood and Environment track. My thesis is on data quality: how to measure what is missing or wrong in a dataset, and how to repair it.</p>
+          <p>I took my MSc in Computer Science Engineering at Federico II in 2023, with a thesis on populating knowledge graphs with generative models. I then joined the Italian National PhD Programme in Artificial Intelligence, in its Agrifood and Environment track. My thesis is on data quality: how to measure what is missing or wrong in a dataset, and how to repair it. The fellowship ended in October 2026; I defend the thesis in 2027.</p>
           <p>Lately that means Sentinel-2 time series, where clouds hide part of almost every acquisition. I reconstruct the covered pixels, and I built EarthJev, which reads all 12 bands of a patch and answers questions with a typed value. I also work on knowledge graphs and retrieval-augmented generation for agriculture and nutrigenetics, and on attacks against image retrieval.</p>
         </div>
         <div class="span-4 start-9">
+          <img class="about-photo" src="assets/img/portrait-large.webp" width="900" height="900" alt="Domenico Benfenati at a conference table" loading="lazy">
           <h3 class="cv-title">Positions</h3>
           <ul class="cv">
             <li><span class="mono">2026–</span><p>Research fellow<span>DIETI, University of Naples Federico II</span></p></li>
-            <li><span class="mono">2023–</span><p>PhD fellow in Artificial Intelligence<span>National PhD Programme, Agrifood and Environment</span></p></li>
+            <li><span class="mono">2023–26</span><p>PhD fellow in Artificial Intelligence<span>National PhD Programme, Agrifood and Environment</span></p></li>
           </ul>
           <h3 class="cv-title">Education</h3>
           <ul class="cv">
+            <li><span class="mono">2027</span><p>PhD in Artificial Intelligence<span>Agrifood and Environment track; thesis defence in 2027</span></p></li>
             <li><span class="mono">2023</span><p>MSc, Computer Science Engineering<span>University of Naples Federico II</span></p></li>
             <li><span class="mono">2020</span><p>BSc, Computer Engineering<span>University of Naples Federico II</span></p></li>
           </ul>
@@ -355,7 +361,7 @@ const HOME_MAIN = `
         <li>
           <h3>Retrieval under attack</h3>
           <p>Focused crawlers and multimodal web page classification; how embedding-space attacks degrade retrieval with pathology foundation models.</p>
-          <p class="refs mono"><span>ACM 2026</span><span>IC3K 2024</span><span>MEDES 2023</span></p>
+          <p class="refs mono"><span>CIKM 2026</span><span>IC3K 2024</span><span>MEDES 2023</span></p>
         </li>
       </ol>
     </div>
@@ -375,7 +381,7 @@ const HOME_MAIN = `
       <ul class="rows">
         <li><span class="rows__name">EarthJev released<small>Preprint on arXiv, code on GitHub, weights on Hugging Face.</small></span><span class="rows__value">Nov 2026</span></li>
         <li><span class="rows__name">I started a research fellowship at DIETI<small>Twelve months, University of Naples Federico II.</small></span><span class="rows__value">Nov 2026</span></li>
-        <li><span class="rows__name">Embedding-space attacks on pathology foundation models<small>Published by ACM.</small></span><span class="rows__value">Nov 2026</span></li>
+        <li><span class="rows__name">Embedding-space attacks on pathology foundation models<small>At CIKM 2026, the ACM International Conference on Information and Knowledge Management.</small></span><span class="rows__value">Nov 2026</span></li>
       </ul>
     </div>
   </section>`;
@@ -403,7 +409,7 @@ const RESEARCH_MAIN = `
         <li>
           <h3>Retrieval under attack</h3>
           <p>Focused crawlers and multimodal web page classification; how embedding-space attacks degrade retrieval with pathology foundation models.</p>
-          <p class="refs mono"><span>ACM 2026</span><span>IC3K 2024</span><span>MEDES 2023</span></p>
+          <p class="refs mono"><span>CIKM 2026</span><span>IC3K 2024</span><span>MEDES 2023</span></p>
         </li>
       </ol>
       <div class="ej" id="earthjev">
@@ -429,8 +435,8 @@ const RESEARCH_MAIN = `
 const PUBS_MAIN = `
   <section class="section ground-surface section--page page-head" id="publications" aria-labelledby="pubs-h">
     <div class="wrap">
-      <div class="rule-head"><h1 id="pubs-h">Publications</h1><a class="plain-link" href="https://orcid.org/0009-0008-5825-8043" rel="noopener">ORCID record</a></div>
-      <p style="margin-bottom:var(--s-6);max-width:60ch">${pubs.length} papers since 2024, ${journals} of them in journals, collected from ORCID and dblp. My name is in bold.</p>
+      <div class="rule-head"><h1 id="pubs-h">Publications</h1><span class="elsewhere"><a class="plain-link" href="https://scholar.google.com/citations?user=tjH_pzcAAAAJ" rel="noopener">Google Scholar</a><a class="plain-link" href="https://orcid.org/0009-0008-5825-8043" rel="noopener">ORCID</a></span></div>
+      <p style="margin-bottom:var(--s-6);max-width:60ch">${pubs.length} papers since 2024, ${journals} of them in journals, collected from ORCID and dblp; citation counts are on Google Scholar. My name is in bold.</p>
       <div class="filters" role="group" aria-label="Filter by type">${filters}</div>
       <div class="publist">${pubList}
       </div>
@@ -479,7 +485,7 @@ const NEWS_MAIN = `
       <ul class="rows">
         <li><span class="rows__name">EarthJev released<small>Preprint on arXiv, code on GitHub, weights on Hugging Face.</small></span><span class="rows__value">Nov 2026</span></li>
         <li><span class="rows__name">I started a research fellowship at DIETI<small>Twelve months, University of Naples Federico II.</small></span><span class="rows__value">Nov 2026</span></li>
-        <li><span class="rows__name">Embedding-space attacks on pathology foundation models<small>Published by ACM.</small></span><span class="rows__value">Nov 2026</span></li>
+        <li><span class="rows__name">Embedding-space attacks on pathology foundation models<small>At CIKM 2026, the ACM International Conference on Information and Knowledge Management.</small></span><span class="rows__value">Nov 2026</span></li>
         <li><span class="rows__name">Ontology-guided GraphRAG<small>Published in Neural Computing and Applications.</small></span><span class="rows__value">Oct 2026</span></li>
         <li><span class="rows__name">Cloud reconstruction at KES 2026, Dublin<small>Presented with Gennaro Iannuzzo.</small></span><span class="rows__value">Sep 2026</span></li>
         <li><span class="rows__name">Multimedia knowledge graph population<small>Published in IEEE Transactions on Artificial Intelligence.</small></span><span class="rows__value">Jun 2026</span></li>
@@ -505,7 +511,9 @@ const CONTACT_MAIN = `
           <p><a class="plain-link" href="https://www.linkedin.com/company/iknos-dieti-unina" rel="noopener">IKNOS Lab on LinkedIn</a></p>
           <h3 class="cv-title">Profiles</h3>
           <p class="elsewhere">
+            <a class="plain-link" href="https://scholar.google.com/citations?user=tjH_pzcAAAAJ" rel="noopener">Google Scholar</a>
             <a class="plain-link" href="https://orcid.org/0009-0008-5825-8043" rel="noopener">ORCID</a>
+            <a class="plain-link" href="https://www.linkedin.com/in/domenico-benfenati/" rel="noopener">LinkedIn</a>
             <a class="plain-link" href="https://github.com/dBenf" rel="noopener">GitHub</a>
             <a class="plain-link" href="https://huggingface.co/dBenf" rel="noopener">Hugging Face</a>
             <a class="plain-link" href="https://dblp.org/pid/367/6149.html" rel="noopener">dblp</a>

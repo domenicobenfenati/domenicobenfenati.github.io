@@ -1,0 +1,279 @@
+[
+ {
+  "year": 2026,
+  "type": "preprint",
+  "title": "EarthJev: typed answers about multispectral Sentinel-2 patches, without generating text",
+  "authors": [
+   "Domenico Benfenati",
+   "Antonio Maria Rinaldi",
+   "Cristian Tommasino"
+  ],
+  "venue": "arXiv preprint 2611.02096",
+  "abbr": "arXiv",
+  "links": {
+   "arXiv": "https://arxiv.org/abs/2611.02096",
+   "Code": "https://github.com/CosmoIknosLab/EarthJev",
+   "Model": "https://huggingface.co/dBenf/EarthJev"
+  },
+  "selected": true
+ },
+ {
+  "year": 2026,
+  "type": "conference",
+  "title": "Embedding-Space Attacks on Pathology Foundation Models for Histopathology Retrieval",
+  "authors": [
+   "Domenico Benfenati",
+   "Antonio Maria Rinaldi",
+   "Cristiano Russo",
+   "Cristian Tommasino"
+  ],
+  "venue": "ACM conference paper",
+  "abbr": "ACM",
+  "doi": "10.1145/3799682.3839897",
+  "selected": true
+ },
+ {
+  "year": 2026,
+  "type": "journal",
+  "title": "Ontology-guided neuro-symbolic GraphRAG for grounded query answering",
+  "authors": [
+   "Domenico Benfenati",
+   "Antonio Maria Rinaldi"
+  ],
+  "venue": "Neural Computing and Applications",
+  "abbr": "NCA",
+  "doi": "10.1007/s00521-026-12495-0",
+  "selected": true
+ },
+ {
+  "year": 2026,
+  "type": "conference",
+  "title": "A Probabilistic Framework for Cloud Reconstruction in Multispectral Satellite Image Time Series",
+  "authors": [
+   "Domenico Benfenati",
+   "Gennaro Iannuzzo",
+   "Giuseppe La Terza",
+   "Cristiano Russo",
+   "Cristian Tommasino",
+   "Antonio Maria Rinaldi",
+   "Angelo Ciaramella"
+  ],
+  "venue": "30th International Conference on Knowledge-Based and Intelligent Information & Engineering Systems, Dublin",
+  "abbr": "KES 2026",
+  "verify": true
+ },
+ {
+  "year": 2026,
+  "type": "journal",
+  "title": "A Generative AI Application for Qualitative Automatic Population of Multimedia Knowledge Graphs",
+  "authors": [
+   "Domenico Benfenati",
+   "Antonio Maria Rinaldi",
+   "Cristiano Russo",
+   "Cristian Tommasino"
+  ],
+  "venue": "IEEE Transactions on Artificial Intelligence",
+  "abbr": "IEEE TAI",
+  "doi": "10.1109/TAI.2025.3638321",
+  "selected": true
+ },
+ {
+  "year": 2026,
+  "type": "chapter",
+  "title": "A Generative Framework for Web Pages Classification Using Multi-modal Topic Fusion",
+  "authors": [
+   "Domenico Benfenati",
+   "Antonio Maria Rinaldi",
+   "Cristiano Russo",
+   "Cristian Tommasino"
+  ],
+  "venue": "Springer book chapter",
+  "abbr": "Springer",
+  "doi": "10.1007/978-3-032-06878-1_6"
+ },
+ {
+  "year": 2026,
+  "type": "chapter",
+  "title": "Knowledge Graph-Enhanced Retrieval-Augmented Generation for Nutrigenetics",
+  "authors": [
+   "Giovanni Maria De Filippis",
+   "Domenico Benfenati",
+   "Gianluca De Carlo",
+   "Antonio Maria Rinaldi"
+  ],
+  "venue": "Artificial Intelligence for Biomedical Data (AIBio)",
+  "abbr": "AIBio",
+  "doi": "10.1007/978-3-032-17216-7_8"
+ },
+ {
+  "year": 2025,
+  "type": "journal",
+  "title": "Data centric Artificial Intelligence for agrifood domain: A systematic mapping study",
+  "authors": [
+   "Domenico Benfenati",
+   "Domenico Amalfitano",
+   "Cristiano Russo",
+   "Cristian Tommasino",
+   "Antonio Maria Rinaldi"
+  ],
+  "venue": "Computers and Electronics in Agriculture, 239: 110847",
+  "abbr": "COMPAG",
+  "doi": "10.1016/j.compag.2025.110847",
+  "selected": true
+ },
+ {
+  "year": 2025,
+  "type": "journal",
+  "title": "Text-Guided Inpainting for Aesthetic Prediction in Orthofacial Surgery: A Patient-Centered AI Approach",
+  "authors": [
+   "Vincenzo Abbate",
+   "Emanuele Carraturo",
+   "Domenico Benfenati",
+   "Sara Tramontano",
+   "Luigi Angelo Vaira",
+   "Stefania Troise",
+   "Gabriele Canzi",
+   "Giorgio Novelli",
+   "Daniela Pacella",
+   "Cristiano Russo"
+  ],
+  "etal": true,
+  "venue": "Medicina",
+  "abbr": "Medicina",
+  "doi": "10.3390/medicina61122075"
+ },
+ {
+  "year": 2025,
+  "type": "conference",
+  "title": "A Multi-Sector Approach to Retrieval Augmented Generation in Agriculture",
+  "authors": [
+   "Domenico Benfenati",
+   "Antonio Maria Rinaldi",
+   "Cristiano Russo",
+   "Cristian Tommasino"
+  ],
+  "venue": "IEEE International Conference on Systems, Man, and Cybernetics, pp. 5940–5945",
+  "abbr": "IEEE SMC",
+  "doi": "10.1109/SMC58881.2025.11343229"
+ },
+ {
+  "year": 2025,
+  "type": "workshop",
+  "title": "A Data-Driven Ontology Framework for Integrating Heterogeneous Vulnerability Sources",
+  "authors": [
+   "Domenico Amalfitano",
+   "Domenico Benfenati",
+   "Davide Landolfi",
+   "Antonio Maria Rinaldi",
+   "Cristiano Russo",
+   "Cristian Tommasino"
+  ],
+  "venue": "Joint Ontology Workshops (JOWO), CEUR-WS Vol. 4176",
+  "abbr": "JOWO",
+  "url": "https://ceur-ws.org/Vol-4176/fomi-4.pdf"
+ },
+ {
+  "year": 2025,
+  "type": "workshop",
+  "title": "Transforming healthcare with AI: the work of CINI-AIIS at Federico II University",
+  "authors": [
+   "Mariano Barone",
+   "Domenico Benfenati",
+   "Salvatore Capuozzo",
+   "Giovanni Maria De Filippis"
+  ],
+  "etal": true,
+  "venue": "Ital-IA 2025, CEUR-WS Vol. 4121",
+  "abbr": "Ital-IA",
+  "url": "https://ceur-ws.org/Vol-4121/Ital-IA_2025_paper_55.pdf"
+ },
+ {
+  "year": 2025,
+  "type": "workshop",
+  "title": "Generative AI: developments, applications, and responsible practices",
+  "authors": [
+   "Alberto Moccardi",
+   "Egidia Cirillo",
+   "Cristina Davino",
+   "Domenico Benfenati"
+  ],
+  "etal": true,
+  "venue": "Ital-IA 2025, CEUR-WS Vol. 4121",
+  "abbr": "Ital-IA",
+  "url": "https://ceur-ws.org/Vol-4121/Ital-IA_2025_paper_83.pdf"
+ },
+ {
+  "year": 2024,
+  "type": "conference",
+  "title": "A Retrieval-augmented Generation application for Question-Answering in Nutrigenetics Domain",
+  "authors": [
+   "Domenico Benfenati",
+   "Giovanni Maria De Filippis",
+   "Antonio Maria Rinaldi",
+   "Cristiano Russo",
+   "Cristian Tommasino"
+  ],
+  "venue": "KES 2024, Procedia Computer Science, pp. 586–595",
+  "abbr": "KES 2024",
+  "doi": "10.1016/j.procs.2024.09.467"
+ },
+ {
+  "year": 2024,
+  "type": "conference",
+  "title": "GenCrawl: A Generative Multimedia Focused Crawler for Web Pages Classification",
+  "authors": [
+   "Domenico Benfenati",
+   "Antonio Maria Rinaldi",
+   "Cristiano Russo",
+   "Cristian Tommasino"
+  ],
+  "venue": "16th International Joint Conference on Knowledge Discovery, Knowledge Engineering and Knowledge Management",
+  "abbr": "IC3K",
+  "doi": "10.5220/0012998900003838"
+ },
+ {
+  "year": 2024,
+  "type": "chapter",
+  "title": "Using Focused Crawlers with Obfuscation Techniques in the Audio Retrieval Domain",
+  "authors": [
+   "Domenico Benfenati",
+   "Marco Montanaro",
+   "Antonio M. Rinaldi",
+   "Cristiano Russo",
+   "Cristian Tommasino"
+  ],
+  "venue": "Management of Digital EcoSystems (MEDES 2023), CCIS",
+  "abbr": "MEDES",
+  "doi": "10.1007/978-3-031-51643-6_1"
+ },
+ {
+  "year": 2024,
+  "type": "workshop",
+  "title": "AI in Medicine: Activities of the CINI-AIIS Lab at University of Naples Federico II",
+  "authors": [
+   "Domenico Benfenati",
+   "Salvatore Capuozzo",
+   "Giovanni Maria De Filippis",
+   "Adriano De Simone"
+  ],
+  "etal": true,
+  "venue": "Ital-IA 2024, CEUR-WS Vol. 3762, pp. 348–353",
+  "abbr": "Ital-IA",
+  "url": "https://ceur-ws.org/Vol-3762/560.pdf"
+ },
+ {
+  "year": 2024,
+  "type": "workshop",
+  "title": "Advancements and Challenges in Generative AI: Architectures, Applications, and Ethical Implications",
+  "authors": [
+   "Flora Amato",
+   "Egidia Cirillo",
+   "Mattia Fonisto",
+   "Domenico Benfenati"
+  ],
+  "etal": true,
+  "venue": "Ital-IA 2024, CEUR-WS Vol. 3762",
+  "abbr": "Ital-IA",
+  "url": "https://ceur-ws.org/Vol-3762/571.pdf"
+ }
+]

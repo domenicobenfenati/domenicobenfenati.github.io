@@ -339,7 +339,7 @@ const HOME_MAIN = `
           <p>Lately that means Sentinel-2 time series, where clouds hide part of almost every acquisition. I reconstruct the covered pixels, and I built EarthJev, which reads all 12 bands of a patch and answers questions with a typed value. I also work on knowledge graphs and retrieval-augmented generation for agriculture and nutrigenetics, and on attacks against image retrieval.</p>
         </div>
         <div class="span-4 start-9">
-          <img class="about-photo" src="assets/img/portrait-large.webp" width="900" height="900" alt="Domenico Benfenati at a conference table" loading="lazy">
+          <img class="about-photo" src="assets/img/portrait-large.webp" width="900" height="900" alt="Domenico Benfenati in front of the University of Naples Federico II seal" loading="lazy">
           <h3 class="cv-title">Positions</h3>
           <ul class="cv">
             <li><span class="mono">2026–</span><p>Research fellow<span>DIETI, University of Naples Federico II</span></p></li>

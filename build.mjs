@@ -105,35 +105,40 @@ const page = ({ title, description, main, current }) => {
   .plain-link { color: var(--ink); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; transition: text-decoration-color var(--dur) var(--ease); }
   .plain-link:hover { text-decoration-color: currentColor; }
 
-  /* hero: a synthetic Sentinel-2 scene under clouds and a reconstruction lens (assets/js/sat-hero.js) */
-  .hero-sat { overflow: hidden; background: #2a3a2c; touch-action: pan-y; }
-  .hero-sat > canvas.sat { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: crosshair; }
-  .sat-veil { position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(90deg, var(--p-bg) 0%, rgba(232,232,227,.96) 36%, rgba(232,232,227,.6) 47%, rgba(232,232,227,0) 58%); }
-  .hero-sat > .wrap { position: relative; z-index: 1; pointer-events: none; }
-  .sat-panel { pointer-events: auto; }
-  .hero-sat h1 { font-size: clamp(56px, 7vw, 104px); line-height: 0.95; letter-spacing: var(--display-tracking-xl); }
+  /* hero: text on the left, a panel of four research lines in rotation on the right (assets/js/rot-hero.js) */
+  .hero-ts .hero__grid { align-items: center; }
   .hero-id { display: flex; align-items: center; gap: var(--s-4); margin-bottom: var(--s-6); }
   .avatar { width: 88px; height: 88px; border-radius: 999px; object-fit: cover; filter: grayscale(.15) contrast(1.02); }
   .hero-id p { font-size: var(--t-small); line-height: 1.45; color: var(--muted); }
   .hero-id b { color: var(--ink); font-weight: 500; }
+  .hero-ts h1 { font-size: clamp(56px, 7vw, 104px); line-height: 0.95; letter-spacing: var(--display-tracking-xl); }
   .hero__lead { max-width: 40ch; }
   .hero-latest { margin-top: var(--s-7); padding-top: var(--s-4); border-top: 1px solid var(--line); font-size: var(--t-small); max-width: 46ch; }
   .hero-latest .mono { color: var(--muted); margin-right: var(--s-2); }
-  .sat-ui { position: absolute; z-index: 2; right: max(var(--gut), (100% - var(--container)) / 2); bottom: 28px; display: grid; justify-items: end; gap: var(--s-2); }
-  .sat-modes { display: inline-flex; border: 1px solid rgba(255,255,255,.5); background: rgba(24,23,21,.78); }
-  .sat-modes button { height: 36px; padding: 0 14px; border: 0; background: transparent; color: #e8e8e3; font: 500 12px/1 var(--font-mono); cursor: pointer; transition: background var(--dur) var(--ease); }
-  .sat-modes button + button { border-left: 1px solid rgba(255,255,255,.25); }
-  .sat-modes button:hover { background: rgba(255,255,255,.12); }
-  .sat-modes button[aria-pressed="true"] { background: var(--p-accent); color: var(--p-ink); }
-  .sat-hint { font: 400 12px/1.5 var(--font-mono); color: #e8e8e3; background: rgba(24,23,21,.78); padding: 6px 10px; white-space: nowrap; }
-  @media (min-width: 1024px) and (max-height: 860px) { .hero-latest { display: none; } }
+  .rot { margin: 0; display: grid; gap: var(--s-3); padding: var(--s-4); background: #f2f2ee; border: 1px solid var(--ink); }
+  .rot-head { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); }
+  .rot-head h2 { font: 400 22px/1.1 var(--font-display); letter-spacing: -0.01em; }
+  .rot-head .rot-count { color: var(--muted); margin-right: var(--s-2); }
+  .rot-nav { display: inline-flex; border: 1px solid var(--ink); }
+  .rot-nav button { height: 32px; min-width: 36px; padding: 0 10px; border: 0; background: transparent; font: 500 11px/1 var(--font-mono); color: var(--ink); cursor: pointer; transition: background var(--dur) var(--ease); }
+  .rot-nav button + button { border-left: 1px solid var(--ink); }
+  .rot-nav button:hover { background: var(--p-surface); }
+  .rot-canvas { width: 100%; height: clamp(300px, 44vh, 400px); display: block; }
+  .rot-text { display: grid; gap: 4px; min-height: 3.6em; }
+  .rot-caption { font-size: var(--t-small); line-height: 1.45; max-width: 60ch; }
+  .rot-ref { color: var(--muted); }
+  .rot-dots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .rot-dot { height: 24px; padding: 0; border: 0; background: transparent; cursor: pointer; position: relative; }
+  .rot-dot::before, .rot-dot::after { content: ""; position: absolute; left: 0; right: 0; top: 11px; height: 2px; }
+  .rot-dot::before { background: rgba(24,23,21,.18); }
+  .rot-dot::after { background: var(--ink); transform-origin: left; transform: scaleX(var(--fill, 0)); }
+  .rot-live { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  @media (min-width: 1024px) and (max-height: 860px) { .hero-latest { display: none; } .hero-id { margin-bottom: var(--s-4); } .rot-canvas { height: 280px; } }
   @media (max-width: 1023px) {
-    main > .hero-sat { height: auto; min-height: 0; padding-bottom: 320px; }
-    .sat-veil { background: linear-gradient(180deg, var(--p-bg) 0%, var(--p-bg) calc(100% - 330px), rgba(232,232,227,0) calc(100% - 290px)); }
-    .sat-ui { left: var(--gut); right: var(--gut); justify-items: start; bottom: 18px; }
-    .sat-hint { display: none; }
-    .sat-modes button { height: 44px; padding: 0 12px; }
+    main > .hero-ts { height: auto; min-height: 0; padding-bottom: var(--s-8); }
+    .hero-ts .rot { margin-top: var(--s-7); }
+    .rot-nav button { height: 44px; min-width: 44px; }
+    .rot-canvas { height: 340px; }
   }
 
   /* about */
@@ -280,20 +285,18 @@ ${NAV.map(([href, label]) => `      <div class="nav__item"><a class="nav__link" 
 <script type="module" src="assets/system.js"></script>
 <script type="module" src="assets/motion/motion.js"></script>
 <script type="module" src="assets/layout/layout.js"></script>
-${home ? '<script type="module" src="assets/js/sat-hero.js"></script>' : ''}
+${home ? '<script type="module" src="assets/js/rot-hero.js"></script>' : ''}
 </body>
 </html>
 `;
 };
 
 const HOME_MAIN = `
-  <section class="hero hero-sat" data-sat data-enter aria-labelledby="hero-h">
-    <canvas class="sat" aria-hidden="true"></canvas>
-    <div class="sat-veil" aria-hidden="true"></div>
+  <section class="hero hero-ts" data-enter aria-labelledby="hero-h">
     <div class="wrap"><div class="hero-text grid hero__grid">
-      <div class="hero__text sat-panel span-5">
+      <div class="hero__text span-5">
         <div class="hero-id">
-          <img class="avatar" src="assets/img/portrait.webp" width="200" height="200" alt="Domenico Benfenati" fetchpriority="high">
+          <img class="avatar" src="assets/img/portrait.webp" width="400" height="400" alt="Domenico Benfenati" fetchpriority="high">
           <p><b>Research fellow</b><br>IKNOS Lab, DIETI<br>University of Naples Federico II</p>
         </div>
         <h1 id="hero-h">Domenico Benfenati</h1>
@@ -301,15 +304,29 @@ const HOME_MAIN = `
         <div class="btn-row"><a class="btn btn--primary" href="publications.html">Read the papers</a><a class="btn btn--secondary" href="contact.html">Email me</a></div>
         <p class="hero-latest"><span class="mono">Nov 2026</span><a class="plain-link" href="research.html#earthjev">EarthJev is out: preprint, code and weights.</a></p>
       </div>
+      <figure class="rot span-6 start-7" data-rot role="region" aria-roledescription="carousel" aria-label="Research lines">
+        <div class="rot-head">
+          <h2><span class="mono rot-count">1/4</span><span class="rot-title">Data quality</span></h2>
+          <div class="rot-nav">
+            <button type="button" data-rot-prev aria-label="Previous research line">←</button>
+            <button type="button" data-rot-pause aria-pressed="false">Pause</button>
+            <button type="button" data-rot-next aria-label="Next research line">→</button>
+          </div>
+        </div>
+        <canvas class="rot-canvas" role="img" aria-label="Animation of the current research line, drawn from synthetic data"></canvas>
+        <div class="rot-text">
+          <p class="rot-caption">Wrong labels, missing values and duplicates are found and repaired; the model is retrained on the clean data.</p>
+          <p class="mono rot-ref">PhD thesis · Comput. Electron. Agric. 2025</p>
+        </div>
+        <div class="rot-dots">
+          <button class="rot-dot" type="button" aria-label="Data quality"></button>
+          <button class="rot-dot" type="button" aria-label="Satellite imagery"></button>
+          <button class="rot-dot" type="button" aria-label="Knowledge graphs and RAG"></button>
+          <button class="rot-dot" type="button" aria-label="Retrieval under attack"></button>
+        </div>
+        <p class="rot-live" aria-live="polite"></p>
+      </figure>
     </div></div>
-    <div class="sat-ui">
-      <div class="sat-modes" role="group" aria-label="Band composite inside the lens">
-        <button type="button" data-composite="tci" aria-pressed="true">B4 B3 B2</button>
-        <button type="button" data-composite="fcc" aria-pressed="false">B8 B4 B3</button>
-        <button type="button" data-composite="ndvi" aria-pressed="false">NDVI</button>
-      </div>
-      <p class="sat-hint">Synthetic scene · move the lens to fill the cloud mask</p>
-    </div>
   </section>
 
   <section class="section ground-surface section--page" id="about" aria-labelledby="about-h">
@@ -533,5 +550,22 @@ const PAGES = [
   ['contact.html', 'Contact: Domenico Benfenati', 'Email and office of Domenico Benfenati, DIETI, University of Naples Federico II.', CONTACT_MAIN],
 ];
 for (const [file, title, description, main] of PAGES) writeFileSync(new URL('./' + file, import.meta.url), page({ current: file, title, description, main }));
+
+// sitemap.xml and robots.txt for search engines; lastmod is the day of the build
+const SITE = 'https://domenicobenfenati.github.io/';
+const today = new Date().toISOString().slice(0, 10);
+writeFileSync(new URL('./sitemap.xml', import.meta.url), `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${PAGES.map(([file]) => `  <url>
+    <loc>${SITE}${file === 'index.html' ? '' : file}</loc>
+    <lastmod>${today}</lastmod>
+  </url>`).join('\n')}
+</urlset>
+`);
+writeFileSync(new URL('./robots.txt', import.meta.url), `User-agent: *
+Allow: /
+
+Sitemap: ${SITE}sitemap.xml
+`);
 writeFileSync(new URL('./favicon.svg', import.meta.url), '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="#181715"/><text x="16" y="22" font-family="Georgia,serif" font-size="16" fill="#e8e8e3" text-anchor="middle">DB</text></svg>');
 console.log('written:', PAGES.map((p) => p[0]).join(', '));

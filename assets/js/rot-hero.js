@@ -144,10 +144,12 @@ if (root) (() => {
     return { GW, GH, cls, shade };
   })();
   function drawSAT(p) {
-    const L = 14, T = 30, PW = W - 28, PH = Math.round((PW * SAT.GH) / SAT.GW), cs = PW / SAT.GW;
+    // the map never takes more than ~44% of the height, so the bar chart keeps its room
+    const L = 14, T = 30, PW = W - 28, cs = Math.min(PW / SAT.GW, ((H - T) * 0.44) / SAT.GH), PH = Math.round(cs * SAT.GH);
+    const MX = L + (PW - cs * SAT.GW) / 2;
     for (let y = 0; y < SAT.GH; y++) for (let x = 0; x < SAT.GW; x++) {
       const i = y * SAT.GW + x, c = CLASSES[SAT.cls[i]].rgb, s = 1 + SAT.shade[i];
-      ctx.fillStyle = `rgb(${c[0] * s | 0},${c[1] * s | 0},${c[2] * s | 0})`; ctx.fillRect(L + x * cs, T + y * cs, cs + 0.5, cs + 0.5);
+      ctx.fillStyle = `rgb(${c[0] * s | 0},${c[1] * s | 0},${c[2] * s | 0})`; ctx.fillRect(MX + x * cs, T + y * cs, cs + 0.5, cs + 0.5);
     }
     // the probe visits several land covers
     const path = [[0.07, 0.3], [0.33, 0.55], [0.42, 0.45], [0.47, 0.25], [0.72, 0.62], [0.88, 0.22]];
@@ -156,7 +158,7 @@ if (root) (() => {
     const px = lerp(a[0], b[0], f), py = lerp(a[1], b[1], f);
     const gx = clamp(Math.floor(px * SAT.GW), 0, SAT.GW - 1), gy = clamp(Math.floor(py * SAT.GH), 0, SAT.GH - 1);
     const C = CLASSES[SAT.cls[gy * SAT.GW + gx]];
-    const sx = L + gx * cs, sy = T + gy * cs;
+    const sx = MX + gx * cs, sy = T + gy * cs;
     ctx.strokeStyle = PAPER; ctx.lineWidth = 3; ctx.strokeRect(sx - 1, sy - 1, cs + 2, cs + 2);
     ctx.strokeStyle = INK; ctx.lineWidth = 1.5; ctx.strokeRect(sx - 1, sy - 1, cs + 2, cs + 2);
     // smooth the spectrum between land covers
@@ -164,18 +166,19 @@ if (root) (() => {
     for (let i = 0; i < 12; i++) drawSAT.cur[i] += (C.r[i] - drawSAT.cur[i]) * 0.18;
     const r = drawSAT.cur;
     // twelve bars
-    const BT = T + PH + 34, BH = H - BT - 34, BL = L + 34, bw = (PW - 34 - 11 * 6) / 12;
+    // bar chart under the map: axis title, then the grid, then one label row; nothing shares a line
+    const BT = T + PH + 44, BH = H - BT - 24, BL = L + 34, gap = PW < 420 ? 4 : 6, bw = (PW - 34 - 11 * gap) / 12;
+    ctx.font = `400 10px ${MONO}`; const every = ctx.measureText('B8A').width + 6 > bw + gap ? 2 : 1;
     ctx.lineWidth = 1;
-    for (const v of [0, 0.25, 0.5]) { const y = Math.round(BT + BH - (v / 0.5) * BH) + 0.5; ctx.strokeStyle = v ? LINE : 'rgba(24,23,21,0.4)'; ctx.beginPath(); ctx.moveTo(L + 30, y); ctx.lineTo(L + PW, y); ctx.stroke(); label(v.toFixed(2), L + 24, y + 3, { size: 10, color: MUTED, align: 'right' }); }
-    label('reflectance', L, BT - 8, { size: 10, color: MUTED });
+    for (const v of BH < 80 ? [0, 0.5] : [0, 0.25, 0.5]) { const y = Math.round(BT + BH - (v / 0.5) * BH) + 0.5; ctx.strokeStyle = v ? LINE : 'rgba(24,23,21,0.4)'; ctx.beginPath(); ctx.moveTo(L + 30, y); ctx.lineTo(L + PW, y); ctx.stroke(); label(v.toFixed(2), L + 24, y + 3, { size: 10, color: MUTED, align: 'right' }); }
+    label('reflectance', L, BT - 16, { size: 10, color: MUTED });
     for (let i = 0; i < 12; i++) {
-      const x = BL + i * (bw + 6), h = (r[i] / 0.5) * BH;
+      const x = BL + i * (bw + gap), h = (r[i] / 0.5) * BH;
       ctx.fillStyle = BAND_COL[i]; ctx.fillRect(x, BT + BH - h, bw, h);
-      label(BANDS[i][0], x + bw / 2, BT + BH + 14, { align: 'center', size: 10, color: MUTED });
+      if (i % every === 0) label(BANDS[i][0], x + bw / 2, BT + BH + 15, { align: 'center', size: 10, color: MUTED });
     }
     const ndvi = (r[7] - r[3]) / (r[7] + r[3] + 1e-6);
     header('pixel under the probe', `${C.name} · NDVI ${ndvi.toFixed(2)}`);
-    label('443 nm', BL, H - 6, { size: 10, color: MUTED }); label('2190 nm', W - 14, H - 6, { size: 10, color: MUTED, align: 'right' });
   }
 
   // ------------------------------------------------------------------ 3 knowledge graph and RAG

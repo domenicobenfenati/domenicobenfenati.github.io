@@ -14,13 +14,14 @@
 <meta name="theme-color" content="#e8e8e3">
 <meta name="site-kind" content="other">
 <meta name="page-type" content="service">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..700&family=Hanken+Grotesk:wght@400..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/newsreader-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/hanken-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
 <link rel="stylesheet" href="assets/system.css">
 <link rel="stylesheet" href="assets/ui/cards.css">
 <link rel="stylesheet" href="assets/motion/motion.css">
 <link rel="stylesheet" href="assets/layout/layout.css">
+
 <style>
 :root {
   --p-bg: #e8e8e3; --p-surface: #dcdcd6; --p-ink: #181715; --p-muted: #5c5b56;
@@ -37,44 +38,50 @@
 }
 </style>
 <script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+
 <style>
   .mono { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0; font-variant-numeric: tabular-nums; }
   h2 { font-family: var(--font-display); }
-  .rule-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s-5); padding-bottom: var(--s-4); margin-bottom: var(--s-6); border-bottom: 1px solid var(--ink); }
+  .rule-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s-5); margin-bottom: var(--s-7); }
   .rule-head h2 { font-size: clamp(36px, 4vw, 56px); line-height: 1; }
   .rule-head .mono, .rule-head a { color: var(--muted); }
   .plain-link { color: var(--ink); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; transition: text-decoration-color var(--dur) var(--ease); }
   .plain-link:hover { text-decoration-color: currentColor; }
 
-  /* hero: a synthetic Sentinel-2 scene under clouds and a reconstruction lens (assets/js/sat-hero.js) */
-  .hero-sat { overflow: hidden; background: #2a3a2c; touch-action: pan-y; }
-  .hero-sat > canvas.sat { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: crosshair; }
-  .sat-veil { position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(90deg, var(--p-bg) 0%, rgba(232,232,227,.96) 36%, rgba(232,232,227,.6) 47%, rgba(232,232,227,0) 58%); }
-  .hero-sat > .wrap { position: relative; z-index: 1; pointer-events: none; }
-  .sat-panel { pointer-events: auto; }
-  .hero-sat h1 { font-size: clamp(56px, 7vw, 104px); line-height: 0.95; letter-spacing: var(--display-tracking-xl); }
+  /* hero: text on the left, a panel of four research lines in rotation on the right (assets/js/rot-hero.js) */
+  .hero-ts .hero__grid { align-items: start; }
+  .hero-ts .hero__kicker { display: block; }
   .hero-id { display: flex; align-items: center; gap: var(--s-4); margin-bottom: var(--s-6); }
   .avatar { width: 88px; height: 88px; border-radius: 999px; object-fit: cover; filter: grayscale(.15) contrast(1.02); }
   .hero-id p { font-size: var(--t-small); line-height: 1.45; color: var(--muted); }
   .hero-id b { color: var(--ink); font-weight: 500; }
+  .hero-ts h1 { font-size: clamp(56px, 7vw, 104px); line-height: 0.95; letter-spacing: var(--display-tracking-xl); }
   .hero__lead { max-width: 40ch; }
   .hero-latest { margin-top: var(--s-7); padding-top: var(--s-4); border-top: 1px solid var(--line); font-size: var(--t-small); max-width: 46ch; }
   .hero-latest .mono { color: var(--muted); margin-right: var(--s-2); }
-  .sat-ui { position: absolute; z-index: 2; right: max(var(--gut), (100% - var(--container)) / 2); bottom: 28px; display: grid; justify-items: end; gap: var(--s-2); }
-  .sat-modes { display: inline-flex; border: 1px solid rgba(255,255,255,.5); background: rgba(24,23,21,.78); }
-  .sat-modes button { height: 36px; padding: 0 14px; border: 0; background: transparent; color: #e8e8e3; font: 500 12px/1 var(--font-mono); cursor: pointer; transition: background var(--dur) var(--ease); }
-  .sat-modes button + button { border-left: 1px solid rgba(255,255,255,.25); }
-  .sat-modes button:hover { background: rgba(255,255,255,.12); }
-  .sat-modes button[aria-pressed="true"] { background: var(--p-accent); color: var(--p-ink); }
-  .sat-hint { font: 400 12px/1.5 var(--font-mono); color: #e8e8e3; background: rgba(24,23,21,.78); padding: 6px 10px; white-space: nowrap; }
-  @media (min-width: 1024px) and (max-height: 860px) { .hero-latest { display: none; } }
+  .rot { margin: 0; display: grid; gap: var(--s-3); padding: var(--s-4); background: #f2f2ee; border: 1px solid var(--ink); }
+  .rot-head { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); }
+  .rot-name { font: 400 22px/1.1 var(--font-display); letter-spacing: -0.01em; }
+  .rot-head .rot-ref { display: block; margin-top: 6px; }
+  .rot-head .rot-count { color: var(--muted); margin-right: var(--s-2); }
+  .rot-nav { display: inline-flex; border: 1px solid var(--ink); }
+  .rot-nav button { height: 32px; min-width: 36px; padding: 0 10px; border: 0; background: transparent; font: 500 11px/1 var(--font-mono); color: var(--ink); cursor: pointer; transition: background var(--dur) var(--ease); }
+  .rot-nav button + button { border-left: 1px solid var(--ink); }
+  .rot-nav button:hover { background: var(--p-surface); }
+  .rot-canvas { width: 100%; height: clamp(300px, 44vh, 400px); display: block; }
+  .rot-ref { color: var(--muted); }
+  .rot-dots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .rot-dot { height: 44px; padding: 0; border: 0; background: transparent; cursor: pointer; position: relative; }
+  .rot-dot::before, .rot-dot::after { content: ""; position: absolute; left: 0; right: 0; top: 21px; height: 2px; }
+  .rot-dot::before { background: rgba(24,23,21,.18); }
+  .rot-dot::after { background: var(--ink); transform-origin: left; transform: scaleX(var(--fill, 0)); }
+  .rot-live { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  @media (min-width: 1024px) and (max-height: 860px) { .hero-latest { display: none; } .hero-id { margin-bottom: var(--s-4); } .rot-canvas { height: 280px; } }
   @media (max-width: 1023px) {
-    main > .hero-sat { height: auto; min-height: 0; padding-bottom: 320px; }
-    .sat-veil { background: linear-gradient(180deg, var(--p-bg) 0%, var(--p-bg) calc(100% - 330px), rgba(232,232,227,0) calc(100% - 290px)); }
-    .sat-ui { left: var(--gut); right: var(--gut); justify-items: start; bottom: 18px; }
-    .sat-hint { display: none; }
-    .sat-modes button { height: 44px; padding: 0 12px; }
+    main > .hero-ts { height: auto; min-height: 0; padding-bottom: var(--s-8); }
+    .hero-ts .rot { margin-top: var(--s-7); }
+    .rot-nav button { height: 44px; min-width: 44px; }
+    .rot-canvas { height: 340px; }
   }
 
   /* about */
@@ -84,17 +91,28 @@
   .cv { display: grid; gap: var(--s-3); }
   .cv li { display: grid; grid-template-columns: 76px 1fr; gap: var(--s-3); padding-bottom: var(--s-3); border-bottom: 1px solid var(--line); }
   .cv .mono { color: var(--muted); padding-top: 3px; }
-  .cv span { display: block; color: var(--muted); font-size: var(--t-small); }
+  .cv span { display: block; color: var(--ink); font-size: var(--t-small); }
   .cv-title { font: 500 12px/1 var(--font-mono); color: var(--muted); margin: var(--s-6) 0 var(--s-3); text-transform: uppercase; letter-spacing: 0.06em; }
   .cv-title:first-child { margin-top: 0; }
 
+  .home-split { align-items: start; }
+  .home-photo { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 22%; display: block; }
+  .index--stack > li { display: block; }
+  .index--stack .ix-text { margin-top: var(--s-2); max-width: 56ch; }
+  .index--stack .refs { margin-top: 4px; }
+  .home-cv { margin-top: var(--s-7); }
+  .home-cv .cv-title { margin-top: 0; }
+  .dg-card { padding: var(--s-4); background: #f2f2ee; border: 1px solid var(--line); }
+  .news-actions { margin-top: var(--s-7); }
   .about-photo { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; margin-bottom: var(--s-6); }
   /* research index */
-  .index > li { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 5fr) minmax(0, 3fr); gap: var(--gutter); padding: var(--s-5) 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .index > li { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); row-gap: var(--s-2); padding: var(--s-5) 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+  .index .ix-name { grid-column: 1 / span 6; }
+  .index .ix-text { grid-column: 7 / span 6; }
   .index > li:first-child { padding-top: 0; }
-  .index h3 { font: 400 clamp(24px, 2.2vw, 32px)/1.1 var(--font-display); letter-spacing: -0.01em; }
+  .index h3 { font: 400 24px/1.15 var(--font-display); letter-spacing: -0.01em; }
   .index p { max-width: 54ch; }
-  .index .refs { display: grid; gap: 4px; color: var(--muted); }
+  .index .refs { display: flex; flex-wrap: wrap; gap: 2px 14px; margin-top: var(--s-2); color: var(--muted); }
 
   /* publications */
   .filters { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-bottom: var(--s-6); }
@@ -152,12 +170,36 @@
 
   @media (max-width: 1023px) {
     .index > li { grid-template-columns: 1fr; gap: var(--s-2); }
+    .index .ix-name, .index .ix-text { grid-column: 1; }
     .pubyear { grid-template-columns: 1fr; gap: var(--s-3); }
     .pub { grid-template-columns: 1fr; gap: var(--s-1); }
     .pub__links { gap: var(--s-4); }
     .pub__links a { display: inline-block; padding: 12px 0; }
   }
+  .site-name { font-family: var(--font-display); font-size: 22px; white-space: nowrap; }
+  .nav .nav__item--menu-only { display: none; }
+  @media (max-width: 1023px) { .nav .nav__item--menu-only { display: block; } }
+  @media (max-width: 420px) { .nav .nav__bar .nav__actions { display: none; } .nav:not(.is-open) .nav__actions + .nav__toggle { margin-left: auto; } .site-name { font-size: 19px; } }
+  @media (max-width: 1023px) { .nav__bar { gap: var(--s-3); } .nav__toggle { margin-left: auto; margin-right: 0; flex: none; } }
   @media (max-width: 639px) {
+    main > .hero-ts { height: auto; min-height: 100svh; padding-bottom: var(--s-5); display: flex; flex-direction: column; }
+    .hero-ts > .wrap { flex: 1; min-height: 0; display: flex; }
+    .hero-ts .hero__grid { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+    .hero-ts h1 { font-size: 52px; }
+    .hero-ts .hero__kicker { font-size: 13px; }
+    .hero-ts .hero__lead { font-size: 17px; line-height: 1.45; margin-top: var(--s-3); }
+    .hero-ts .btn-row { margin-top: var(--s-4); }
+    .hero-latest, .hero-ts .wide-only, .hero-ts .rot-ref { display: none; }
+    .hero-ts .btn-row { flex-direction: row; flex-wrap: wrap; align-items: center; gap: var(--s-2) var(--s-5); }
+    .hero-ts .hero__text { min-width: 0; }
+    .hero-ts .btn-row .btn { width: auto; flex: none; }
+    .hero-ts .rot { flex: 1; min-height: 0; margin-top: var(--s-5); grid-template-rows: auto minmax(0, 1fr) auto; padding: var(--s-3); gap: var(--s-2); }
+    .hero-ts .rot-canvas { height: 100%; min-height: 240px; }
+    .rot-name { font-size: 19px; }
+    .rot-dot { height: 32px; } .rot-dot::before, .rot-dot::after { top: 15px; }
+  }
+  @media (max-width: 639px) {
+    .elsewhere a, .rule-head a { display: inline-block; padding-block: 12px; }
     .bands { grid-template-columns: repeat(6, minmax(0, 1fr)); }
     .bands li { padding-top: 32px; }
     .bands-axis { display: none; }
@@ -174,7 +216,7 @@
 <header class="nav">
   <div class="wrap nav__bar">
     <a class="skip-link" href="#top">Skip to content</a>
-    <a class="nav__logo" href="index.html" style="font-family:var(--font-display);font-size:22px">Domenico Benfenati</a>
+    <a class="nav__logo site-name" href="index.html">Domenico Benfenati</a>
     <nav class="nav__links" aria-label="Main">
       <div class="nav__item"><a class="nav__link" href="index.html">About</a></div>
       <div class="nav__item"><a class="nav__link" href="research.html">Research</a></div>
@@ -182,6 +224,7 @@
       <div class="nav__item"><a class="nav__link" href="service.html">Service</a></div>
       <div class="nav__item"><a class="nav__link" href="teaching.html">Teaching</a></div>
       <div class="nav__item"><a class="nav__link" href="news.html">News</a></div>
+      <div class="nav__item nav__item--menu-only"><a class="nav__link" href="contact.html">Contact</a></div>
     </nav>
     <div class="nav__actions">
       <a class="btn btn--primary" href="contact.html">Contact</a>

@@ -290,7 +290,9 @@ if (root) (() => {
     cur = (i + SCENES.length) % SCENES.length; start = performance.now(); pausedAt = 0; drawSAT.cur = null;
     const s = SCENES[cur];
     titleEl.textContent = s.title; countEl.textContent = `${cur + 1}/${SCENES.length}`;
-    capEl.textContent = s.caption; refEl.textContent = s.ref;
+    if (capEl) capEl.textContent = s.caption;
+    refEl.textContent = s.ref;
+    canvas.setAttribute('aria-label', `${s.title}: ${s.caption} Drawn from synthetic data.`);
     dots.forEach((d, k) => { d.setAttribute('aria-current', k === cur ? 'true' : 'false'); d.style.setProperty('--fill', k < cur ? 1 : 0); });
     root.querySelector('.rot-live').textContent = user ? `${s.title}. ${s.caption}` : '';
   }

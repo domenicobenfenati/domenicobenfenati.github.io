@@ -205,7 +205,8 @@ ${home ? "<script>document.documentElement.classList.add('mo-js');setTimeout(()=
   .cv-title:first-child { margin-top: 0; }
 
   .home-split { align-items: start; }
-  .home-photo { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 22%; display: block; }
+  .home-photo { width: 100%; max-width: 340px; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 22%; display: block; margin-left: auto; }
+  @media (max-width: 1023px) { .home-photo { max-width: 260px; margin-left: 0; margin-top: var(--s-6); } }
   .index--stack > li { display: block; }
   .index--stack .ix-text { margin-top: var(--s-2); max-width: 56ch; }
   .index--stack .refs { margin-top: 4px; }
@@ -265,7 +266,7 @@ ${home ? "<script>document.documentElement.classList.add('mo-js');setTimeout(()=
   .site-foot__legal { text-align: right; }
   .page-head { padding-top: calc(var(--nav, 72px) + var(--s-8)); }
   .page-head h1 { font: 400 clamp(48px, 6vw, 88px)/1 var(--font-display); letter-spacing: var(--display-tracking-xl); }
-  .page-head p { margin-top: var(--s-4); max-width: 60ch; font-size: var(--t-lead); }
+  .page-head .rule-head + p { margin-top: var(--s-4); max-width: 60ch; font-size: var(--t-lead); }
   main > .section--page { height: auto; min-height: 0; }
   main > .section--page { padding-block: var(--s-8, 96px); }
   main > .section--page.page-head { padding-top: calc(var(--nav, 72px) + var(--s-8, 96px)); }
@@ -274,6 +275,7 @@ ${home ? "<script>document.documentElement.classList.add('mo-js');setTimeout(()=
   .ej { margin-top: var(--s-6); padding-top: var(--s-6); border-top: 1px solid var(--line); }
   @media (max-width: 1023px) { .site-foot__legal { text-align: left; } }
   .contact-line { font: 400 clamp(28px, 3.4vw, 48px)/1.1 var(--font-display); letter-spacing: -0.015em; }
+  #contact .footer__address { font: 400 var(--t-body)/1.5 var(--font-text); font-style: normal; letter-spacing: 0; }
   .contact-line a { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; }
   .elsewhere { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5); }
 
@@ -472,24 +474,20 @@ const RESEARCH_MAIN = `
       <p style="margin:0 0 var(--s-7)">I work on the quality of the data that AI models learn from, mostly in Earth observation and agrifood. Four lines run in parallel; each lists the papers behind it.</p>
       <ol class="index">
         <li>
-          <h3>Data quality and data-centric AI</h3>
-          <p>Measuring and repairing training data: missing values, noisy labels, gaps in time series. With colleagues I mapped how the agrifood literature handles it.</p>
-          <p class="refs mono"><span>Comput. Electron. Agric. 2025</span><span>KES 2026</span></p>
+          <div class="ix-name"><h3>Data quality and data-centric AI</h3><p class="refs mono"><span>Comput. Electron. Agric. 2025</span><span>KES 2026</span></p></div>
+          <p class="ix-text">Measuring and repairing training data: missing values, noisy labels, gaps in time series. With colleagues I mapped how the agrifood literature handles it.</p>
         </li>
         <li>
-          <h3>Satellite image time series</h3>
-          <p>A probabilistic model that reconstructs cloud-covered pixels across a Sentinel-2 series, and EarthJev, which answers typed questions from the 12 bands of a patch.</p>
-          <p class="refs mono"><span>arXiv 2611.02096</span><span>KES 2026</span></p>
+          <div class="ix-name"><h3>Satellite image time series</h3><p class="refs mono"><span>arXiv 2611.02096</span><span>KES 2026</span></p></div>
+          <p class="ix-text">A probabilistic model that reconstructs cloud-covered pixels across a Sentinel-2 series, and EarthJev, which answers typed questions from the 12 bands of a patch.</p>
         </li>
         <li>
-          <h3>Knowledge graphs and RAG</h3>
-          <p>Generative models that populate multimedia knowledge graphs, and retrieval that keeps answers tied to an ontology, for agriculture and nutrigenetics.</p>
-          <p class="refs mono"><span>IEEE TAI 2026</span><span>Neural Comput. Appl. 2026</span><span>IEEE SMC 2025</span><span>KES 2024</span></p>
+          <div class="ix-name"><h3>Knowledge graphs and RAG</h3><p class="refs mono"><span>IEEE TAI 2026</span><span>Neural Comput. Appl. 2026</span><span>IEEE SMC 2025</span><span>KES 2024</span></p></div>
+          <p class="ix-text">Generative models that populate multimedia knowledge graphs, and retrieval that keeps answers tied to an ontology, for agriculture and nutrigenetics.</p>
         </li>
         <li>
-          <h3>Retrieval under attack</h3>
-          <p>Focused crawlers and multimodal web page classification; how embedding-space attacks degrade retrieval with pathology foundation models.</p>
-          <p class="refs mono"><span>CIKM 2026</span><span>IC3K 2024</span><span>MEDES 2023</span></p>
+          <div class="ix-name"><h3>Retrieval under attack</h3><p class="refs mono"><span>CIKM 2026</span><span>IC3K 2024</span><span>MEDES 2023</span></p></div>
+          <p class="ix-text">Focused crawlers and multimodal web page classification; how embedding-space attacks degrade retrieval with pathology foundation models.</p>
         </li>
       </ol>
       <div class="ej" id="earthjev">
@@ -513,7 +511,7 @@ const RESEARCH_MAIN = `
     </div>
   </section>`;
 const PUBS_MAIN = `
-  <section class="section ground-surface section--page page-head" id="publications" aria-labelledby="pubs-h">
+  <section class="section section--page page-head" id="publications" aria-labelledby="pubs-h">
     <div class="wrap">
       <div class="rule-head"><h1 id="pubs-h">Publications</h1><span class="elsewhere"><a class="plain-link" href="https://scholar.google.com/citations?user=tjH_pzcAAAAJ" rel="noopener">Google Scholar</a><a class="plain-link" href="https://orcid.org/0009-0008-5825-8043" rel="noopener">ORCID</a></span></div>
       <p style="margin-bottom:var(--s-6);max-width:60ch">${pubs.length} papers since 2024, ${journals} of them in journals, collected from ORCID and dblp; citation counts are on Google Scholar. My name is in bold.</p>
@@ -523,7 +521,7 @@ const PUBS_MAIN = `
     </div>
   </section>`;
 const SERVICE_MAIN = `
-  <section class="section ground-surface section--page page-head" id="service" aria-labelledby="service-h">
+  <section class="section section--page page-head" id="service" aria-labelledby="service-h">
     <div class="wrap">
       <div class="rule-head"><h1 id="service-h">Service</h1></div>
       <p style="margin:0 0 var(--s-7)">Peer review for journals, as recorded on my ORCID profile.</p>
